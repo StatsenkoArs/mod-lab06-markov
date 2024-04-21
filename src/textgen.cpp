@@ -74,7 +74,7 @@ std::string Markov::gen_text(int size) {
             break;
         }
     }
-    int genSize = 3;
+    int genSize = 2;
     std::vector <std::string> suff;
     std::string pick;
     while (genSize < size) {
