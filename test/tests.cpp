@@ -33,7 +33,7 @@ TEST(pick_suffix, test3) {
     Markov chain;
     std::string in = "The difference between";
     chain.gen_tab(in, 2);
-    EXPECT_EQ({"between"}, chain.statetab[{"The", "difference"}];
+    EXPECT_EQ({"between"}, chain.statetab[{"The", "difference"}]);
 }
 
 TEST(pick_single_suffix, test4) {
