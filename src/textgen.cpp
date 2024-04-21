@@ -52,19 +52,19 @@ std::string Markov::prefixToString(prefix pre) {
 }
 
 std::string Markov::pick_next(prefix cur) {
-    int seed = static_cast<unsigned int> (time(0));
-    std::default_random_engine eng(seed);
-    std::uniform_int_distribution<> ran(0, statetab[cur].size() - 1);
-    return statetab[cur][ran(eng)];
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<> distrib(0, statetab[cur].size() - 1);
+    return statetab[cur][distrib(gen)];
 }
 
 std::string Markov::gen_text(int size) {
     std::string result = "";
     prefix current;
-    int seed = static_cast<unsigned int> (time(0));
-    std::default_random_engine eng(seed);
-    std::uniform_int_distribution<> ran(0, statetab[current].size() - 1);
-    int first = ran(eng);
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<> distrib(0, statetab.size() - 1);
+    int first = distrib(gen);
     int ind = 0;
     for (const auto& el : statetab) {
         ind++;
