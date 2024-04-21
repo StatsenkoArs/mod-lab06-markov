@@ -1,8 +1,11 @@
+// Copyright 2024 StatsenkoArs
+
 #include "textgen.h"
 
-std::map<prefix, std::vector<std::string>> statetab; // префикс-суффиксы
+Markov::Markov() { }
+Markov::~Markov() { }
 
-std::vector<std::string> mySplit(std::string str, char separator) {
+std::vector<std::string> Markov::mySplit(std::string str, char separator) {
     std::vector<std::string> result;
     int first = 0;
     for (int i = 0; i < str.length(); i++) {
@@ -17,13 +20,13 @@ std::vector<std::string> mySplit(std::string str, char separator) {
     return result;
 }
 
-std::string gen(std::string text) {
+std::string Markov::gen(std::string text) {
     gen_tab(text, NPREF);
 
     return gen_text(MAXGEN);
 }
 
-prefix gen_pre(std::vector<std::string> words, int pos, int npref){
+prefix Markov::gen_pre(std::vector<std::string> words, int pos, int npref) {
     prefix pre;
     for (int i = pos - npref; i < pos; i++) {
         pre.push_back(words[i]);
@@ -31,7 +34,7 @@ prefix gen_pre(std::vector<std::string> words, int pos, int npref){
     return pre;
 }
 
-void gen_tab(std::string text, int npref) {
+void Markov::gen_tab(std::string text, int npref) {
     std::vector<std::string> words = mySplit(text, ' ');
     prefix pre;
     for (int i = npref; i < words.size(); i++) {
@@ -40,7 +43,7 @@ void gen_tab(std::string text, int npref) {
     }
 }
 
-std::string prefixToString(prefix pre) {
+std::string Markov::prefixToString(prefix pre) {
     std::string s = "";
     for (int i = 0; i < NPREF; i++) {
         s += pre.at(i) + " ";
@@ -48,11 +51,11 @@ std::string prefixToString(prefix pre) {
     return s;
 }
 
-std::string pick_next(prefix cur) {
+std::string Markov::pick_next(prefix cur) {
     return statetab[cur][rand() % (statetab[cur].size())];
 }
 
-std::string gen_text(int size) {
+std::string Markov::gen_text(int size) {
     std::string result = "";
     prefix current;
     srand(static_cast<int> (time(0)));
@@ -70,7 +73,7 @@ std::string gen_text(int size) {
     std::vector <std::string> suff;
     std::string pick;
     while (genSize < size) {
-        if (statetab[current].size() == 0) 
+        if (statetab[current].size() == 0)
             break;
         pick = pick_next(current);
         result += pick + " ";
