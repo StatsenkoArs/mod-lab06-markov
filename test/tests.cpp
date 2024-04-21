@@ -5,7 +5,8 @@
 
 TEST(gen_prefix, test1) {
     Markov chain;
-    std::string in = "The difference between stupidity and genius is that genius has its limits.";
+    std::string in = "The difference between stupidity"
+        " and genius is that genius has its limits.";
     std::vector<std::string> words = chain.mySplit(in, ' ');
     int len = 3;
     int pos = 4;
@@ -16,7 +17,8 @@ TEST(gen_prefix, test1) {
 
 TEST(gen_prefix_suffix, test2) {
     Markov chain;
-    std::string in = "The difference between stupidity and genius is that genius has its limits.";
+    std::string in = "The difference between stupidity"
+        " and genius is that genius has its limits.";
     chain.gen_tab(in, 11);
     prefix key({ "The", "difference", "between", "stupidity",
         "and", "genius", "is", "that", "genius", "has", "its" });
@@ -31,8 +33,8 @@ TEST(pick_suffix, test3) {
     Markov chain;
     std::string in = "The difference between";
     chain.gen_tab(in, 2);
-    std::string text = chain.gen_text(1);
-    EXPECT_EQ("between ", text);
+    std::string text = chain.gen_text(3);
+    EXPECT_EQ("The difference between ", text);
 }
 
 TEST(pick_single_suffix, test4) {
@@ -47,12 +49,11 @@ TEST(pick_single_suffix, test4) {
 TEST(gen_all_text, test5) {
     Markov chain;
     chain.statetab = {
-        { { "Cheese" }, { "Burger" } },
-        { { "Burger" }, { "Pizza" }},
-        { { "Hungry?" }, { "Maybe" } },
+        { { "a", "b" }, { "c", "d" } },
+        { { "1", "2" }, { "3" }}
     };
-    std::string text = chain.gen_text(1);
-    ASSERT_TRUE((text == "Cheese Burger ")
-        || (text == "Burger Pizza ")
-        || (text == "Hungry? Maybe "));
+    std::string text = chain.gen_text(3);
+    ASSERT_TRUE((text == "1 2 3 ")
+        || (text == "a b c ")
+        || (text == "a b d "));
 }

@@ -3,11 +3,12 @@
 #ifndef INCLUDE_TEXTGEN_H_
 #define INCLUDE_TEXTGEN_H_
 
+
 #include <fstream>
 #include <string>
 #include <vector>
-#include <map>
 #include <deque>
+#include <map>
 #include <ctime>
 
 const int NPREF = 2;  // количество слов в префиксе
