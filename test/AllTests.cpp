@@ -1,6 +1,6 @@
-// Copyright 2020 GHA Test Team
+// Copyright 2024 StatsenkoArs
 
-#include "googletest/googletest/include/gtest/gtest.h"
+#include <gtest/gtest.h>
 
 int main(int argc, char **argv) {
   ::testing::InitGoogleTest(&argc, argv);

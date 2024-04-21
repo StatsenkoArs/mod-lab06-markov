@@ -5,8 +5,7 @@
 
 TEST(gen_prefix, test1) {
     Markov chain;
-    std::string in = 
-        "The difference between stupidity and genius is that genius has its limits.";
+    std::string in = "The difference between stupidity and genius is that genius has its limits.";
     std::vector<std::string> words = chain.mySplit(in, ' ');
     int len = 3;
     int pos = 4;
@@ -17,8 +16,7 @@ TEST(gen_prefix, test1) {
 
 TEST(gen_prefix_suffix, test2) {
     Markov chain;
-    std::string in = 
-        "The difference between stupidity and genius is that genius has its limits.";
+    std::string in = "The difference between stupidity and genius is that genius has its limits.";
     chain.gen_tab(in, 11);
     prefix key({ "The", "difference", "between", "stupidity",
         "and", "genius", "is", "that", "genius", "has", "its" });
